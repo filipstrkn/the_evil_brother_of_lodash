@@ -60,6 +60,27 @@ const _ = {}
 
 
 
+    /**
+     * @description Creates a new array of elements split into groups with size of given buffer
+     * @param {Array} stream Array to chop
+     * @param {Number} buffer Size of chunks
+     * @returns {Array}
+     */
+    EVIL.chunk = (stream = [], buffer = stream.length) => {
+        const sipStream = () => {
+            result.push(stream.slice(last, last + buffer))
+            last = last + buffer
+            if (last < stream.length) sipStream()
+            return
+        }
+        const result = []
+        let last = 0
+        sipStream()
+        return result
+    }
+
+
+
     /*
     |==============================================================================
     | Strings
