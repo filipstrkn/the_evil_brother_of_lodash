@@ -48,6 +48,22 @@ const _ = {}
 
 
 
+    /**
+     * @description Creates an array of array values not included in the other given array
+     * @param {Array} arr Array to test
+     * @param {Array} values Value to compare
+     * @returns {Array} returns a new array with those values which were not found in the tested array
+     */
+    EVIL.difference = (arr, values) => {
+        if (Array.isArray(arr) && Array.isArray(values)) {
+            const theLeftOvers = []
+            arr.filter(a => values.indexOf(a) < 0 && theLeftOvers.push(a))
+            return theLeftOvers
+        } else { throw new Error('Arguments must be arrays') }
+    }
+
+
+
     /*
     |==============================================================================
     | Strings
