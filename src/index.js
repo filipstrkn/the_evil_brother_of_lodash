@@ -54,12 +54,8 @@ const _ = {}
      * @param {Array} values Value to compare
      * @returns {Array} returns a new array with those values which were not found in the tested array
      */
-    EVIL.difference = (arr, values) => {
-        if (Array.isArray(arr) && Array.isArray(values)) {
-            const theLeftOvers = []
-            arr.filter(a => values.indexOf(a) < 0 && theLeftOvers.push(a))
-            return theLeftOvers
-        } else { throw new Error('Arguments must be arrays') }
+    EVIL.difference = (arr = [], values = []) => {
+        return arr.filter(a => !values.includes(a))
     }
 
 
