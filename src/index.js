@@ -81,6 +81,26 @@ const _ = {}
 
 
 
+    /**
+     * @description Creates a new array concatenating values from other arguments
+     * @param {Array} array Array to concat with
+     * @param {Array} values Values to concat
+     * @returns {Array}
+     */
+    EVIL.concat = (array = [], ...values) => {
+        const result = array.slice(0)
+        for (const value of values) {
+            if (Array.isArray(value)) {
+                for (const child of value) result.push(child)
+            } else {
+                result.push(value)
+            }
+        }
+        return result
+    }
+
+
+
     /*
     |==============================================================================
     | Strings
