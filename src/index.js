@@ -101,6 +101,24 @@ const _ = {}
 
 
 
+    /**
+     * @description Fills elements of array with value from start up to a defined end.
+     * @param {Array} array
+     * @param {*} value
+     * @param {Number} start
+     * @param {Number} end
+     */
+    EVIL.fill = (array = [], value, start = 0, end = array.length) => {
+        const newArr = []
+        for (let i = 0; i < array.length; i++) {
+            if (i >= start && i < end) newArr.push(value)
+            else newArr.push(array[i])
+        }
+        return newArr
+    }
+
+
+
     /*
     |==============================================================================
     | Strings
