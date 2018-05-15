@@ -26,6 +26,21 @@ const _ = {}
 
     /*
     |==============================================================================
+    | Error messages
+    |==============================================================================
+    |
+    */
+    const ERRORS = {
+        TYPE: {
+            ARRAY: 'Expected an array',
+            STRING: 'Expected a string'
+        }
+    }
+
+
+
+    /*
+    |==============================================================================
     | Arrays
     |==============================================================================
     |
@@ -133,7 +148,7 @@ const _ = {}
      * @param {String} text
      * @returns {String}
      */
-    EVIL.capitalize = (text) => {
+    EVIL.capitalize = text => {
         if (typeof text === 'string') {
             const isSent = text.indexOf(' ') > -1 ? true : false
             if (isSent) {
@@ -147,7 +162,35 @@ const _ = {}
                     .map((p, i) => i === 0 ? p.toUpperCase() : p.toLowerCase())
                     .join('')
             }
-        } else { throw new Error('Argument must be a string') }
+        } else { throw new TypeError(ERRORS.TYPE.STRING)}
+    }
+
+
+
+    /*
+    |==============================================================================
+    | Functions
+    |==============================================================================
+    |
+    */
+
+
+
+    /**
+     * @description Calling a function only once
+     * @param {Function} fn a function that you'd like to call once
+     * @param {Object} [ctx]
+     */
+    EVIL.once = (fn, ctx) => {
+        const f = fn.toString()
+        let result
+        return function () {
+            if (fn) {
+                result = fn.apply(ctx || this, arguments)
+                fn = null
+            } else { console.error('Function has already run!', f) }
+            return result
+        }
     }
 
 
